@@ -1,5 +1,3 @@
-/* $Header: /usr/people/sam/tiff/libtiff/RCS/tiffcompat.h,v 1.21 92/03/30 18:31:03 sam Exp $ */
-
 /*
  * Copyright (c) 1990, 1991, 1992 Sam Leffler
  * Copyright (c) 1991, 1992 Silicon Graphics, Inc.
@@ -37,34 +35,18 @@
  *
  * NB: This file is a mess.
  */
-#if (defined(__STDC__) || defined(__EXTENDED__)) && !defined(USE_PROTOTYPES)
+
 #define	USE_PROTOTYPES	1
 #define	USE_CONST	1
-#endif
 
-#if !USE_CONST && !defined(const)
-#define	const
-#endif
-
-#ifdef THINK_C
-#include <unix.h>
-#include <math.h>
-#endif
-#if USE_PROTOTYPES
-#include <stdio.h>
-#endif
-#ifndef THINK_C
 #include <sys/types.h>
-#endif
-#ifdef VMS
-#include <file.h>
-#include <unixio.h>
-#else
+#include <sys/stat.h>
 #include <fcntl.h>
-#endif
-#if defined(THINK_C) || defined(applec)
+#include <unistd.h>
+
+#include <stdio.h>
 #include <stdlib.h>
-#endif
+#include <strings.h>
 
 /*
  * Workarounds for BSD lseek definitions.
@@ -84,49 +66,15 @@
 #endif
 
 /*
- * SVID workarounds for BSD bit
- * string manipulation routines.
- */
-#if defined(SYSV) || defined(THINK_C) || defined(applec) || defined(VMS)
-#define	bzero(dst,len)		memset((char *)dst, 0, len)
-#define	bcopy(src,dst,len)	memcpy((char *)dst, (char *)src, len)
-#define	bcmp(src, dst, len)	memcmp((char *)dst, (char *)src, len)
-#endif
-
-/*
- * The BSD typedefs are used throughout the library.
- * If your system doesn't have them in <sys/types.h>,
- * then define BSDTYPES in your Makefile.
- */
-#ifdef BSDTYPES
-typedef	unsigned char u_char;
-typedef	unsigned short u_short;
-typedef	unsigned int u_int;
-typedef	unsigned long u_long;
-#endif
-
-/*
  * Return an open file descriptor or -1.
  */
-#if defined(applec) || defined(THINK_C)
-#define	TIFFOpenFile(name, mode, prot)	open(name, mode)
-#else
-#if defined(MSDOS)
-#define	TIFFOpenFile(name, mode, prot)	open(name, mode|O_BINARY, prot)
-#else
 #define	TIFFOpenFile(name, mode, prot)	open(name, mode, prot)
-#endif
-#endif
 
 /*
  * Return the size in bytes of the file
  * associated with the supplied file descriptor.
  */
-#if USE_PROTOTYPES
 extern	long TIFFGetFileSize(int fd);
-#else
-extern	long TIFFGetFileSize();
-#endif
 
 #ifdef MMAP_SUPPORT
 /*
@@ -137,24 +85,8 @@ extern	long TIFFGetFileSize();
  *     region and the size of the mapped region.
  * TIFFUnmapFileContents does the inverse operation.
  */
-#if USE_PROTOTYPES
 extern	int TIFFMapFileContents(int fd, char **paddr, long *psize);
 extern	void TIFFUnmapFileContents(char *addr, long size);
-#else
-extern	int TIFFMapFileContents();
-extern	void TIFFUnmapFileContents();
-#endif
-#endif
-
-/*
- * Mac workaround to handle the file
- * extension semantics of lseek.
- */
-#ifdef applec
-#define	lseek	mpw_lseek
-extern long mpw_lseek(int, long, int);
-#else
-extern	long lseek();
 #endif
 
 /*
@@ -170,47 +102,19 @@ extern	long lseek();
 #define	WriteOK(fd, buf, size)	(write(fd, (char *)buf, size) == size)
 #endif
 
-#if defined(__MACH__) || defined(THINK_C)
-extern	void *malloc(size_t size);
-extern	void *realloc(void *ptr, size_t size);
-#else /* !__MACH__ && !THINK_C */
-#if defined(MSDOS)
-#include <malloc.h>
-#else /* !MSDOS */
-#if defined(_IBMR2)
-#include <stdlib.h>
-#else /* !_IBMR2 */
-extern	char *malloc();
-extern	char *realloc();
-#endif /* _IBMR2 */
-#endif /* !MSDOS */
-#endif /* !__MACH__ */
-
 /*
  * dblparam_t is the type that a double precision
  * floating point value will have on the parameter
  * stack (when coerced by the compiler).
  */
-#ifdef applec
-typedef extended dblparam_t;
-#else
 typedef double dblparam_t;
-#endif
 
 /*
  * Varargs parameter list handling...YECH!!!!
  */
-#if defined(__STDC__) && !defined(USE_VARARGS)
 #define	USE_VARARGS	0
-#endif
 
-#if defined(USE_VARARGS)
-#if USE_VARARGS
-#include <varargs.h>
-#define	VA_START(ap, parmN)	va_start(ap)
-#else
 #include <stdarg.h>
 #define	VA_START(ap, parmN)	va_start(ap, parmN)
-#endif
-#endif /* defined(USE_VARARGS) */
+
 #endif /* _COMPAT_ */
