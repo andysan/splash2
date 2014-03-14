@@ -7,7 +7,7 @@ CFLAGS=-O2 -pthread -Wno-deprecated-declarations -Wno-unused-result
 LDFLAGS=-pthread
 LIBS=-lm
 
-ANL_MACROS:=$(abspath null_macros/c.m4.null)
+ANL_MACROS:=$(abspath anl_macros/c.m4.null)
 
 all: autoall
 
