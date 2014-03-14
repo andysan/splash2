@@ -45,7 +45,9 @@ $(d)/glibps/libglibps.a: $(d)/glibps/glibps.o
 $(d)/glibdumb/libglib.a: $(d)/glibdumb/glib.o
 	${AR} rc $@ $^
 
-$(d)/radiosity: $(OBJS) $(d)/glibdumb/libglib.a $(d)/glibps/libglibps.a
+$(d)/radiosity: $(OBJS) $(d)/glibdumb/libglib.a $(d)/glibps/libglibps.a \
+	$(ANL_OBJS)
+
 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
 
 d		:= $(dirstack_$(sp))

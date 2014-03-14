@@ -3,7 +3,8 @@
 *.c
 *.h
 *.a
-
+!/codes/anl_macros/anl_posix/*.h
+!/codes/anl_macros/anl_posix/*.c
 !/codes/shmem_files/sgi/*.c
 !/codes/shmem_files/sgi/*.h
 !/codes/apps/raytrace/rltotiff/*.c

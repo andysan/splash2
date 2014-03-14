@@ -20,7 +20,7 @@ HEADERS = $(patsubst %.H, %.h, $(wildcard $(d)/*.H))
 $(d)/%.o: $(d)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) $(BARNES_CFLAGS) -c -o $@ $<
 
-$(d)/barnes: $(OBJS)
+$(d)/barnes: $(OBJS) $(ANL_OBJS)
 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
 
 d		:= $(dirstack_$(sp))

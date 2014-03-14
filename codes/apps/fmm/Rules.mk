@@ -21,7 +21,7 @@ HEADERS = $(patsubst %.H, %.h, $(wildcard $(d)/*.H))
 $(d)/%.o: $(d)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) $(FMM_CFLAGS) -c -o $@ $<
 
-$(d)/fmm: $(OBJS)
+$(d)/fmm: $(OBJS) $(ANL_OBJS)
 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
 
 d		:= $(dirstack_$(sp))

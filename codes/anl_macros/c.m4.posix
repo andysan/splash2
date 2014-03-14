@@ -1,0 +1,61 @@
+divert(-1)
+define(NEWPROC,) dnl
+
+define(BARRIER, `anl_barrier_wait(&($1), $2);')
+define(BARDEC, `anl_barrier_t $1;')
+define(BARINIT, `anl_barrier_init(&($1));')
+
+define(BAREXCLUDE, `{;}')
+
+define(BARINCLUDE, `{;}')
+
+define(GSDEC, `long ($1);')
+define(GSINIT, `{ ($1) = 0; }')
+define(GETSUB, `{
+  if (($1)<=($3))
+    ($2) = ($1)++;
+  else {
+    ($2) = -1;
+    ($1) = 0;
+  }
+}')
+
+define(NU_GSDEC, `long ($1);')
+define(NU_GSINIT, `{ ($1) = 0; }')
+define(NU_GETSUB, `GETSUB($1,$2,$3,$4)')
+
+define(LOCKDEC, `anl_lock_t ($1);')
+define(LOCKINIT, `anl_lock_init(&($1));')
+define(LOCK, `anl_lock(&($1));')
+define(UNLOCK, `anl_unlock(&($1));')
+
+define(ALOCKDEC, `anl_lock_t $1[$2];')
+define(ALOCKINIT, `anl_alock_init($1, $2);')
+define(ALOCK, `anl_alock($1, $2);')
+define(AULOCK, `anl_aulock($1, $2);')
+
+define(PAUSEDEC, `anl_pause_t $1;')
+define(PAUSEINIT, `anl_pause_init(&($1));')
+define(CLEARPAUSE, `anl_pause_clear(&($1));')
+define(SETPAUSE, `anl_pause_set(&($1));')
+define(WAITPAUSE, `anl_pause_wait(&($1))')
+
+define(WAIT_FOR_END, `anl_thread_join_all();')
+define(CREATE, `anl_thread_create($1);')
+
+define(MAIN_INITENV, `anl_main_init();')
+define(MAIN_END, `anl_main_end();')
+
+define(MAIN_ENV,`#include <anl_posix/anl_posix.h>')
+
+define(ENV, ` ')
+define(EXTERN_ENV, `#include <anl_posix/anl_posix.h>')
+
+define(G_MALLOC, `anl_alloc($1);')
+define(G_FREE, `anl_free($1);')
+define(NU_MALLOC, `anl_alloc($1);')
+define(NU_FREE, `anl_free($1);')
+
+define(CLOCK, `{ ($1) = anl_clock(); }')
+
+divert(0)

@@ -25,7 +25,7 @@ HEADERS = $(patsubst %.H, %.h, $(wildcard $(d)/*.H))
 $(d)/%.o: $(d)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) $(VOLREND_CFLAGS) -c -o $@ $<
 
-$(d)/volrend: $(OBJS) $(d)/libtiff/libtiff.a
+$(d)/volrend: $(OBJS) $(d)/libtiff/libtiff.a $(ANL_OBJS)
 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
 
 d		:= $(dirstack_$(sp))

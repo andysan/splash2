@@ -3,11 +3,13 @@ CC=gcc
 LD=gcc
 M4=m4
 
-CFLAGS=-O2 -pthread -Wno-deprecated-declarations -Wno-unused-result
+ANL_CFLAGS=-I$(abspath anl_macros)
+CFLAGS=-O2 -pthread -Wno-deprecated-declarations -Wno-unused-result $(ANL_CFLAGS)
 LDFLAGS=-pthread
 LIBS=-lm
 
-ANL_MACROS:=$(abspath anl_macros/c.m4.null)
+ANL_MACROS:=$(abspath anl_macros/c.m4.posix)
+ANL_OBJS=anl_macros/anl_posix/libanl.a
 
 all: autoall
 
@@ -26,6 +28,9 @@ dir:=apps
 include $(dir)/Rules.mk
 
 dir:=kernels
+include $(dir)/Rules.mk
+
+dir:=anl_macros/anl_posix
 include $(dir)/Rules.mk
 
 autoall: $(ALL)

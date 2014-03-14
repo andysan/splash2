@@ -23,7 +23,7 @@ HEADERS = $(patsubst %.H, %.h, $(wildcard $(d)/*.H))
 $(d)/%.o: $(d)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) $(RAYTRACE_CFLAGS) -c -o $@ $<
 
-$(d)/raytrace: $(OBJS)
+$(d)/raytrace: $(OBJS) $(ANL_OBJS)
 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
 
 d		:= $(dirstack_$(sp))

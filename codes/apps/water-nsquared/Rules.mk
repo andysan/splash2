@@ -22,7 +22,7 @@ HEADERS = $(patsubst %.H, %.h, $(wildcard $(d)/*.H))
 $(d)/%.o: $(d)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) $(WATER_NSQUARED_CFLAGS) -c -o $@ $<
 
-$(d)/water-nsquared: $(OBJS)
+$(d)/water-nsquared: $(OBJS) $(ANL_OBJS)
 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
 
 d		:= $(dirstack_$(sp))
