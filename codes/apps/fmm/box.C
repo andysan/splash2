@@ -155,7 +155,7 @@ InitBox (int my_id, real x_center, real y_center, real length, box *parent)
  *
  */
 void
-PrintBox (box *b)
+PrintBox (int my_id, box *b)
 {
    int i;
   

@@ -124,7 +124,7 @@ extern void CreateBoxes(int my_id, int num_boxes);
 extern void FreeBoxes(int my_id);
 extern box *InitBox(int my_id, real x_center, real y_center, real length,
 		    box *parent);
-extern void PrintBox(box *b);
+extern void PrintBox(int my_id, box *b);
 extern void PrintBoxArrayIds(box *b_array[], int array_length);
 extern void PrintExpansionTerms(complex expansion[]);
 
