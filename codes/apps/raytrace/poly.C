@@ -125,8 +125,8 @@ OBJECT	*po;
  */
 
 VOID	PolyElementBoundBox(pe, pp)
-ELEMENT *pe;
-POLY	*pp;
+struct element *pe;
+struct poly	*pp;
 	{
 	INT	i;			/* Index.			     */
 	INT	*vindex;		/* Vertex index pointer.	     */

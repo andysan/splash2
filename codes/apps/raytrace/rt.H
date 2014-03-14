@@ -653,6 +653,10 @@ typedef struct	gmem
 	GMEM;
 
 
+struct poly;
+struct sphere;
+struct tri;
+
 
 /*
  *	Define flags and associated types.
@@ -746,7 +750,7 @@ extern	void NormalizeEnv(double (*normMat)[4]);
 extern	char LookupCommand(char *s);
 extern	void ReadEnvFile(char *EnvFileName);
 
-extern	void RunLengthEncode(struct _iobuf *pf,struct pixel *fb,long xsize);
+extern VOID RunLengthEncode(FILE *pf, PIXEL *fb, INT xsize);
 extern	void OpenFrameBuffer(void);
 extern	void AddPixelColor(double *c,long x,long y);
 extern	void CloseFrameBuffer(char *PicFileName);
@@ -823,7 +827,6 @@ extern	void ma_print(void );
 /*
  *	Define polygon function prototypes.
  */
-
 extern	char *PolyName(void );
 extern	void PolyPrint(struct object *po);
 extern	void PolyElementBoundBox(struct element *pe,struct poly *pp);
@@ -833,12 +836,12 @@ extern	void PolyDataNormalize(struct object *po,double (*normMat)[4]);
 extern	long PolyPeIntersect(struct ray *pr,struct element *pe,struct irecord *hit);
 extern	long PolyIntersect(struct ray *pr,struct object *po,struct irecord *hit);
 extern	void PolyTransform(struct object *po,double (*xtrans)[4],double (*xinvT)[4]);
-extern	void PolyRead(struct object *po,struct _iobuf *pf);
+extern	void PolyRead(struct object *po, FILE *pf);
 
 extern	void CopyRayMsg(struct ray *rdst,struct ray *rsrc);
-extern	void InitRayTreeStack(long TreeDepth, int pid);
-extern	void PushRayTreeStack(struct ray *rmsg, int pid);
-extern	long PopRayTreeStack(struct ray *rmsg, int pid);
+extern	void InitRayTreeStack(long TreeDepth, long pid);
+extern	void PushRayTreeStack(struct ray *rmsg, long pid);
+extern	long PopRayTreeStack(struct ray *rmsg, long pid);
 
 extern	void SpecularDirection(double *R,double *N,double *I);
 extern	unsigned long TransmissionDirection(double *T,double *N,double *I,double kn);
@@ -857,7 +860,7 @@ extern	void SphDataNormalize(struct object *po,double (*normMat)[4]);
 extern	long SphPeIntersect(struct ray *pr,struct element *pe,struct irecord *hit);
 extern	long SphIntersect(struct ray *pr,struct object *po,struct irecord *hit);
 extern	void SphTransform(struct object *po,double (*xtrans)[4],double (*xinvT)[4]);
-extern	void SphRead(struct object *po,struct _iobuf *pf);
+extern	void SphRead(struct object *po, FILE *pf);
 
 extern	unsigned long GetRayJobFromBundle(struct rayjob *job,long *x,long *y);
 extern	void ConvertPrimRayJobToRayMsg(struct ray *ray,double x,double y);
@@ -876,7 +879,7 @@ extern	void TriDataNormalize(struct object *po,double (*normMat)[4]);
 extern	long TriPeIntersect(struct ray *pr,struct element *pe,struct irecord *hit);
 extern	long TriIntersect(struct ray *pr,struct object *po,struct irecord *hit);
 extern	void TriTransform(struct object *po,double (*xtrans)[4],double (*xinvT)[4]);
-extern	void TriRead(struct object *po,struct _iobuf *pf);
+extern	void TriRead(struct object *po, FILE *pf);
 
 extern	void InitWorkPool(long pid);
 extern	void PrintWorkPool(long pid);
