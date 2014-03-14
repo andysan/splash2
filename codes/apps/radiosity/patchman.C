@@ -275,7 +275,17 @@ void define_patch( patch, root, process_id )
  *
  ****************************************************************************/
 
-void split_into_3(), split_into_2() ;
+static void split_into_2(Patch *patch,
+                         ElemVertex *ev1, ElemVertex *ev2, ElemVertex *ev3, 
+                         Edge *e12, Edge *e23, Edge *e31,
+                         Patch *parent,
+                         unsigned process_id);
+
+static void split_into_3(Patch *patch,
+                         ElemVertex *ev1, ElemVertex *ev2, ElemVertex *ev3, 
+                         Edge *e12, Edge *e23, Edge *e31,
+                         Patch *parent,
+                         unsigned process_id);
   
   void split_patch( patch, node, xing_code, process_id )
   

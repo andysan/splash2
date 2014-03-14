@@ -71,9 +71,14 @@ static FILE *ps_fd ;
 
 
 
-void gset_unit_matrix(), gconcatenate_matrix(), gscale_matrix() ;
-void gtranslate_matrix(), grotate_x_matrix(), grotate_y_matrix() ;
-void grotate_z_matrix(), gtransform(), ginverse_matrix() ;
+static void gset_unit_matrix(), gconcatenate_matrix(), gscale_matrix() ;
+static void gtranslate_matrix(), grotate_x_matrix(), grotate_y_matrix() ;
+static void grotate_z_matrix(), gtransform(), ginverse_matrix() ;
+
+static void init_transformation();
+static void setup_transformation();
+
+static double det(), cdet() ;
 
 
 /************************************************************************
@@ -88,9 +93,6 @@ void grotate_z_matrix(), gtransform(), ginverse_matrix() ;
 int ps_open( file )
     char *file ;
 {
-      void init_transformation() ;
-      void setup_transformation() ;
-
       if( (ps_fd = fopen( file, "w" )) == 0 )
       {
 	    perror( file ) ;
@@ -347,8 +349,6 @@ void ps_setup_view( rot_x, rot_y, dist, zoom )
 
     float rot_x, rot_y, dist, zoom ;
 {
-      void setup_transformation() ;
-
       prp.v[0] = 0.0 ;
       prp.v[1] = 0.0 ;
       prp.v[2] = (float)dist ;
@@ -746,7 +746,6 @@ static void ginverse_matrix( m1, m2 )
     Matrix *m1, *m2 ;
 {
       double detval ;
-      double det(), cdet() ;
       
       /* det(m2) */
       detval = det( m2 ) ;
@@ -780,7 +779,6 @@ static double det( m )
     Matrix *m ;
 {
       double det_sum ;
-      double cdet() ;
       
       /* Expand with respect to column 4 */
       det_sum = 0.0 ;
