@@ -339,7 +339,7 @@ startrun()
    int seed;
 
    infile = getparam("in");
-   if (*infile != NULL) {
+   if (*infile != '\0') {
       inputdata();
    }
    else {

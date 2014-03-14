@@ -40,7 +40,7 @@ initparam(argv, defv)
 string getparam(name)
   string name;                        /* name of parameter */
 {
-   int scanbind(), i, strlen(), leng;
+   int scanbind(), i, leng;
    string extrvalue(), def;
    char buf[128], *strcpy();
    char* temp;
@@ -71,7 +71,7 @@ int getiparam(name)
    string getparam(), val;
    int atoi();
 
-   for (val = ""; *val == NULL;) {
+   for (val = ""; *val == '\0';) {
       val = getparam(name);
    }
    return (atoi(val));
@@ -83,7 +83,7 @@ long getlparam(name)
    string getparam(), val;
    long atol();
 
-   for (val = ""; *val == NULL; )
+   for (val = ""; *val == '\0'; )
       val = getparam(name);
    return (atol(val));
 }
@@ -93,7 +93,7 @@ bool getbparam(name)
 {
    string getparam(), val;
     
-   for (val = ""; *val == NULL; )
+   for (val = ""; *val == '\0'; )
       val = getparam(name);
    if (strchr("tTyY1", *val) != NULL) {
       return (TRUE);
@@ -110,7 +110,7 @@ double getdparam(name)
    string getparam(), val;
    double atof();
 
-   for (val = ""; *val == NULL; ) {
+   for (val = ""; *val == '\0'; ) {
       val = getparam(name);
    }
    return (atof(val));
@@ -150,7 +150,7 @@ bool matchname(bind, name)
       bp++;
       np++;
    }
-   return (*bp == '=' && *np == NULL);
+   return (*bp == '=' && *np == '\0');
 }
 
 /*
@@ -163,7 +163,7 @@ string extrvalue(arg)
    char *ap;
 
    ap = (char *) arg;
-   while (*ap != NULL)
+   while (*ap != '\0')
       if (*ap++ == '=')
 	 return ((string) ap);
    return (NULL);

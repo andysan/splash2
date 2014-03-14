@@ -55,8 +55,8 @@ maketree(ProcessId)
       }
       else {
 	 LOCK(Global->io_lock);
-	 fprintf(stderr, "Process %d found body %d to have zero mass\n",
-		 ProcessId, (int) p);	
+	 fprintf(stderr, "Process %u found body %li to have zero mass\n",
+		 ProcessId, (long) p);	
 	 UNLOCK(Global->io_lock);
       }
    }
@@ -157,7 +157,7 @@ printtree (n)
       printf("\n");
       for (k = 0; k < l->num_bodies; k++) {
 	 p = Bodyp(l)[k];
-	 printf("Body #%2d: Num = %2d, Level = %o, ",
+	 printf("Body #%2li: Num = %2d, Level = %o, ",
 		p - bodytab, k, Level(p));
 	 PRTV("Pos",Pos(p));
 	 printf("\n");
@@ -220,7 +220,7 @@ loadtree(p, root, ProcessId)
 	       }
 	    }
 	    if (!valid_root) {
-	       printf("P%d body %d\n", ProcessId, p - bodytab);
+	       printf("P%u body %li\n", ProcessId, p - bodytab);
 	       root = Global->G_root;
 	    }
 	 }

@@ -20,8 +20,6 @@
 #include "stdinc.h"
 #include <assert.h>
 
-#include <ulocks.h>
-
 #include "vectmath.h"
 
 #define MAX_PROC 128

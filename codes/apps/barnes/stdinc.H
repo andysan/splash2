@@ -25,7 +25,10 @@
  * If not already loaded, include stdio.h.
  */
 
+#include <errno.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /*
  * STREAM: a replacement for FILE *.
