@@ -7,17 +7,18 @@ LD=gcc
 M4=m4
 INSTALL=install
 
-ANL_CFLAGS=-I$(abspath anl_macros)
-CFLAGS=-O2 -pthread -Wno-deprecated-declarations -Wno-unused-result $(ANL_CFLAGS)
-LDFLAGS=-pthread
+CFLAGS?=-O2 -pthread -Wno-deprecated-declarations -Wno-unused-result
+LDFLAGS?=-pthread
 LIBS=-lm
+
+ANL_CFLAGS=-I$(abspath anl_macros)
+CFLAGS:=$(CFLAGS) $(ANL_CFLAGS)
 
 ANL_MACROS:=$(abspath anl_macros/c.m4.posix)
 ANL_OBJS=anl_macros/anl_posix/libanl.a
 
-all: autoall
-
-LU_CFLAGS=-DPAGE_SIZE=4096
+# Benchmark-specfic configuration
+LU_CFLAGS?=-DPAGE_SIZE=4096
 
 # ANL generated files
 ANL_CLEAN=
@@ -27,6 +28,8 @@ CLEAN=
 
 # Binaries
 ALL=
+
+all: autoall
 
 dir:=apps
 include $(dir)/Rules.mk
@@ -52,21 +55,21 @@ install_extra: $(EXTRA)
 	@echo "Installing extras..." 
 	install -d $(addprefix $(PREFIX)/, $(dir $^))
 	for F in $^; do \
-		$(INSTALL) $$F $(PREFIX)/$$F; \
+		$(INSTALL) -m 0644 $$F $(PREFIX)/$$F; \
 	done
 
 install_data: $(INPUT)
 	@echo "Installing input files..." 
 	install -d $(addprefix $(PREFIX)/, $(dir $^))
 	for F in $^; do \
-		$(INSTALL) $$F $(PREFIX)/$$F; \
+		$(INSTALL) -m 0644 $$F $(PREFIX)/$$F; \
 	done
 
 install_bin: $(ALL)
 	@echo "Installing binaries..." 
 	install -d $(addprefix $(PREFIX)/, $(dir $^))
 	for F in $^; do \
-		$(INSTALL) $$F $(PREFIX)/$$F; \
+		$(INSTALL) -m 0755 $$F $(PREFIX)/$$F; \
 	done
 
 install: install_bin install_data install_extra

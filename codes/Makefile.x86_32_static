@@ -1,0 +1,4 @@
+CFLAGS=-m32 -O2 -pthread -Wno-deprecated-declarations -Wno-unused-result
+LDFLAGS=-m32 -pthread -static
+
+include Makefile
