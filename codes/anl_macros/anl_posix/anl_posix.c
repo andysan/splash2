@@ -198,6 +198,7 @@ void anl_barrier_wait(anl_barrier_t *bar, int count)
             pthread_cond_wait(&bar->cond, &bar->mutex);
         }
     } else {
+        bar->count = 0;
         ++bar->generation;
         ANL_E_PTH(pthread_cond_broadcast(&bar->cond));
     }
