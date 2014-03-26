@@ -21,6 +21,7 @@ OBJS = $(addprefix $(d)/, \
 
 HEADERS = $(patsubst %.H, %.h, $(wildcard $(d)/*.H))
 
+VOLREND_CFLAGS:=$(VOLREND_CFLAGS) -I$(d)/libtiff
 
 $(d)/%.o: $(d)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) $(VOLREND_CFLAGS) -c -o $@ $<
