@@ -12,6 +12,9 @@ CLEAN := $(CLEAN) \
 ALL := $(ALL) \
 	$(d)/radix
 
+EXTRA := $(EXTRA) \
+	$(d)/README.radix
+
 OBJS = $(addprefix $(d)/, \
 	radix.o)
 

@@ -15,6 +15,12 @@ CLEAN := $(CLEAN) \
 ALL := $(ALL) \
 	$(d)/volrend
 
+INPUT := $(INPUT) \
+	$(wildcard $(d)/inputs/*)
+
+EXTRA := $(EXTRA) \
+	$(d)/README.volrend
+
 OBJS = $(addprefix $(d)/, \
 	main.o file.o option.o map.o normal.o opacity.o octree.o view.o \
 	render.o adaptive.o raytrace.o)

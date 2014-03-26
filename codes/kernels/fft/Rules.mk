@@ -12,6 +12,9 @@ CLEAN := $(CLEAN) \
 ALL := $(ALL) \
 	$(d)/fft
 
+EXTRA := $(EXTRA) \
+	$(d)/README.fft
+
 OBJS = $(addprefix $(d)/, \
 	fft.o)
 

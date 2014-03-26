@@ -1,7 +1,11 @@
 
+# Installation prefix
+PREFIX?=install
+
 CC=gcc
 LD=gcc
 M4=m4
+INSTALL=install
 
 ANL_CFLAGS=-I$(abspath anl_macros)
 CFLAGS=-O2 -pthread -Wno-deprecated-declarations -Wno-unused-result $(ANL_CFLAGS)
@@ -44,6 +48,29 @@ autoall: $(ALL)
 %.h: %.H
 	cd $(dir $<) && $(M4) $(ANL_MACROS) $(notdir $<) > $(notdir $@)
 
+install_extra: $(EXTRA)
+	@echo "Installing extras..." 
+	install -d $(addprefix $(PREFIX)/, $(dir $^))
+	for F in $^; do \
+		$(INSTALL) $$F $(PREFIX)/$$F; \
+	done
+
+install_data: $(INPUT)
+	@echo "Installing input files..." 
+	install -d $(addprefix $(PREFIX)/, $(dir $^))
+	for F in $^; do \
+		$(INSTALL) $$F $(PREFIX)/$$F; \
+	done
+
+install_bin: $(ALL)
+	@echo "Installing binaries..." 
+	install -d $(addprefix $(PREFIX)/, $(dir $^))
+	for F in $^; do \
+		$(INSTALL) $$F $(PREFIX)/$$F; \
+	done
+
+install: install_bin install_data install_extra
+
 barnes: apps/barnes/barnes
 fmm: apps/fmm/fmm
 ocean: apps/ocean/contiguous_partitions/ocean \
@@ -72,6 +99,7 @@ clean:
 realclean: clean anlclean
 
 .PHONY: all autoall anlclean clean realclean \
+	install install_bin install_extra install_data \
 	apps kernels \
 	barnes fmm ocean radiosity raytrace volrend water \
 	cholesky fft lu radix

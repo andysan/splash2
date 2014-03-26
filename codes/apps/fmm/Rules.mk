@@ -12,6 +12,12 @@ CLEAN := $(CLEAN) \
 ALL := $(ALL) \
 	$(d)/fmm
 
+INPUT := $(INPUT) \
+	$(wildcard $(d)/inputs/*)
+
+EXTRA := $(EXTRA) \
+	$(d)/README.fmm
+
 OBJS = $(addprefix $(d)/, \
 	defs.o memory.o particle.o box.o partition_grid.o \
 	cost_zones.o construct_grid.o interactions.o fmm.o)

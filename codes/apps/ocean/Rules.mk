@@ -2,16 +2,13 @@ sp 		:= $(sp).x
 dirstack_$(sp)	:= $(d)
 d		:= $(dir)
 
-dir:=$(d)/cholesky
+EXTRA := $(EXTRA) \
+	$(d)/README.ocean
+
+dir:=$(d)/contiguous_partitions
 include $(dir)/Rules.mk
 
-dir:=$(d)/fft
-include $(dir)/Rules.mk
-
-dir:=$(d)/lu
-include $(dir)/Rules.mk
-
-dir:=$(d)/radix
+dir:=$(d)/non_contiguous_partitions
 include $(dir)/Rules.mk
 
 d		:= $(dirstack_$(sp))

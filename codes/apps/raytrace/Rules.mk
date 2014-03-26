@@ -12,6 +12,12 @@ CLEAN := $(CLEAN) \
 ALL := $(ALL) \
 	$(d)/raytrace
 
+INPUT := $(INPUT) \
+	$(wildcard $(d)/inputs/*)
+
+EXTRA := $(EXTRA) \
+	$(d)/README.raytrace
+
 OBJS = $(addprefix $(d)/, \
 	bbox.o cr.o env.o fbuf.o geo.o huprn.o husetup.o hutv.o isect.o \
 	main.o matrix.o memory.o poly.o raystack.o shade.o sph.o trace.o \

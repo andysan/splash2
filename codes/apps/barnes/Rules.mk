@@ -12,6 +12,12 @@ CLEAN := $(CLEAN) \
 ALL := $(ALL) \
 	$(d)/barnes
 
+INPUT := $(INPUT) \
+	$(d)/input
+
+EXTRA := $(EXTRA) \
+	$(d)/README.barnes
+
 OBJS = $(addprefix $(d)/, \
 	code_io.o load.o grav.o util.o getparam.o code.o)
 

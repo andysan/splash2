@@ -8,10 +8,7 @@ include $(dir)/Rules.mk
 dir:=$(d)/fmm
 include $(dir)/Rules.mk
 
-dir:=$(d)/ocean/contiguous_partitions
-include $(dir)/Rules.mk
-
-dir:=$(d)/ocean/non_contiguous_partitions
+dir:=$(d)/ocean
 include $(dir)/Rules.mk
 
 dir:=$(d)/radiosity

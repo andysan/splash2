@@ -12,6 +12,12 @@ CLEAN := $(CLEAN) \
 ALL := $(ALL) \
 	$(d)/cholesky
 
+INPUT := $(INPUT) \
+	$(wildcard $(d)/inputs/*)
+
+EXTRA := $(EXTRA) \
+	$(d)/README.cholesky
+
 OBJS = $(addprefix $(d)/, \
 	amal.o assign.o bfac.o bksolve.o block2.o fo.o mf.o numLL.o \
 	parts.o seg.o solve.o tree.o util.o malloc.o \

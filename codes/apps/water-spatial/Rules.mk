@@ -12,6 +12,12 @@ CLEAN := $(CLEAN) \
 ALL := $(ALL) \
 	$(d)/water-spatial
 
+INPUT := $(INPUT) \
+	$(d)/input
+
+EXTRA := $(EXTRA) \
+	$(d)/README.water-spatial
+
 OBJS = $(addprefix $(d)/, \
 	water.o mdmain.o syscons.o kineti.o bndry.o cnstnt.o initia.o \
 	interf.o intraf.o cshift.o poteng.o predcor.o \

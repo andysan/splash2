@@ -15,6 +15,9 @@ CLEAN := $(CLEAN) \
 ALL := $(ALL) \
 	$(d)/radiosity
 
+EXTRA := $(EXTRA) \
+	$(d)/README.radiosity
+
 OBJS = $(addprefix $(d)/, \
 	rad_main.o patchman.o elemman.o taskman.o modelman.o smallobj.o\
 	display.o visible.o rad_tools.o room_model.o)
